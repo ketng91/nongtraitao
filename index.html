@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Nông Trại Làng Lá</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+font-family:Arial;
+}
+
+body{
+
+background:linear-gradient(#b9ecff,#dfffd8);
+
+padding:30px;
+}
+
+h1{
+
+text-align:center;
+color:#1d8f35;
+margin-bottom:30px;
+}
+
+.container{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+
+gap:20px;
+
+}
+
+.card{
+
+background:white;
+
+border-radius:18px;
+
+padding:20px;
+
+text-align:center;
+
+box-shadow:0 6px 15px rgba(0,0,0,.15);
+
+transition:.3s;
+
+}
+
+.card:hover{
+
+transform:translateY(-6px);
+
+}
+
+.house{
+
+font-size:42px;
+
+}
+
+.name{
+
+font-size:22px;
+
+font-weight:bold;
+
+margin:8px 0;
+
+color:#333;
+
+}
+
+.tree{
+
+font-size:70px;
+
+margin:10px 0;
+
+}
+
+.progress{
+
+height:16px;
+
+background:#ddd;
+
+border-radius:20px;
+
+overflow:hidden;
+
+margin:15px 0;
+
+}
+
+.bar{
+
+height:100%;
+
+background:#4CAF50;
+
+}
+
+.score{
+
+font-size:18px;
+
+font-weight:bold;
+
+color:#444;
+
+}
+
+.level{
+
+margin-top:8px;
+
+font-size:16px;
+
+color:#888;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>🌿 NÔNG TRẠI LÀNG LÁ 🌿</h1>
+
+<div class="container" id="farm"></div>
+
+<script>
+
+const MAX = 170;
+
+const students=[
+
+{name:"Ngọc",score:68},
+
+{name:"Ni",score:109},
+
+{name:"Như",score:87},
+
+{name:"Phát",score:84},
+
+{name:"Ngân",score:104},
+
+{name:"Sơn",score:119},
+
+{name:"Uyên",score:67},
+
+{name:"Hoàng",score:144},
+
+
+];
+function tree(score){
+
+    if(score < 50) return "🌱";
+
+    if(score < 100) return "🌿";
+
+    if(score < 170) return "🌳🌸";
+
+    return "🌳🍎";
+
+}
+
+function level(score){
+
+    if(score < 50) return "Mầm non";
+
+    if(score < 100) return "Cây non";
+
+    if(score < 170) return "Đã ra hoa 🌸";
+
+    return "Đã ra quả 🍎";
+
+}
+
+
+const farm=document.getElementById("farm");
+
+students.forEach((s,i)=>{
+
+let percent=Math.min(100,s.score/MAX*100);
+
+farm.innerHTML+=`
+
+<div class="card">
+
+<div class="house">🏡</div>
+
+<div class="name">Hộ ${i+1}<br>${s.name}</div>
+
+<div class="tree">${tree(s.score)}</div>
+
+<div class="progress">
+
+<div class="bar" style="width:${percent}%"></div>
+
+</div>
+
+<div class="score">${s.score} / ${MAX}</div>
+
+<div class="level">${level(s.score)}</div>
+
+</div>
+
+`;
+
+});
+
+</script>
+
+</body>
+</html>
